@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🦫 CAPYBARA EXCHANGE</title>
+  <title>Capybara Exchange</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,11 +12,11 @@
       theme: {
         extend: {
           colors: {
-            gelap: '#0F0F0F',
-            kartu: '#1A1A1A',
-            emas: '#D4AF37',
-            emasTerang: '#F9DC73',
-            emasMuda: '#FFF2CC',
+            dark: '#0F0F0F',
+            card: '#1A1A1A',
+            gold: '#D4AF37',
+            goldLight: '#F9DC73',
+            goldSoft: '#FFF2CC',
           },
           fontFamily: {
             sans: ['Inter','sans-serif'],
@@ -27,15 +27,15 @@
   </script>
   <style>
     body{background:radial-gradient(circle at top,#1A170E,#0F0F0F 55%)}
-    .btn-emas{background:linear-gradient(135deg,#D4AF37,#B8860B);color:#000;font-weight:bold;transition:all 0.2s}
-    .btn-emas:hover{background:linear-gradient(135deg,#F9DC73,#D4AF37);transform:translateY(-1px)}
-    .btn-gelap{background:#252525;border:1px solid #D4AF37;transition:all 0.2s}
-    .btn-gelap:hover{background:#1F1F1F;border-color:#F9DC73}
+    .btn-gold{background:linear-gradient(135deg,#D4AF37,#B8860B);color:#000;font-weight:bold;transition:all 0.2s}
+    .btn-gold:hover{background:linear-gradient(135deg,#F9DC73,#D4AF37);transform:translateY(-1px)}
+    .btn-dark{background:#252525;border:1px solid #D4AF37;transition:all 0.2s}
+    .btn-dark:hover{background:#1F1F1F;border-color:#F9DC73}
     .card{border:1px solid rgba(212,175,55,0.2);box-shadow:0 0 18px rgba(212,175,55,0.08)}
-    .kilap{text-shadow:0 0 12px rgba(249,220,115,0.35)}
+    .glow{text-shadow:0 0 12px rgba(249,220,115,0.35)}
   </style>
 </head>
-<body class="text-emasMuda min-h-screen max-w-md mx-auto p-4">
+<body class="text-goldSoft min-h-screen max-w-md mx-auto p-4">
   <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
@@ -43,69 +43,70 @@
     tg.expand();
   </script>
 
-  <!-- JUDUL DAN LOGO -->
+  <!-- HEADER & LOGO -->
   <div class="text-center mb-5">
-    <img src="https://i.imgur.com/7CBIS0B.png" alt="Logo Capybara" class="w-24 h-24 mx-auto mb-3 rounded-xl border border-emas/40">
-    <h1 class="text-3xl font-bold kilap">🦫 CAPYBARA EXCHANGE</h1>
-    <p class="text-sm opacity-70 mt-1">Saham Digital • Dividen 6%/Tahun • USDT TON</p>
+    <!-- Use DIRECT image link (not album link) -->
+    <img src="https://i.imgur.com/7CBIS0B.png" alt="Capybara Exchange Logo" class="w-24 h-24 mx-auto mb-3 rounded-xl border border-gold/40">
+    <h1 class="text-3xl font-bold glow">Capybara Exchange</h1>
+    <p class="text-sm opacity-70 mt-1">Digital Shares • Profit-Sharing Dividends • USDT on TON</p>
   </div>
 
-  <!-- KARTU DATA UTAMA -->
-  <div class="card bg-kartu rounded-2xl p-4 mb-4">
+  <!-- ACCOUNT SUMMARY -->
+  <div class="card bg-card rounded-2xl p-4 mb-4">
     <div class="flex justify-between items-center mb-3">
-      <span class="opacity-80">Unit Saham Kamu</span>
-      <span class="text-2xl font-bold text-emasTerang">-- Unit</span>
+      <span class="opacity-80">Your Shares</span>
+      <span class="text-2xl font-bold text-goldLight">-- Units</span>
     </div>
     <div class="flex justify-between items-center mb-3">
-      <span class="opacity-80">Dividen Terkumpul</span>
-      <span class="text-xl font-semibold text-emasTerang">-- USDT</span>
+      <span class="opacity-80">Dividends Earned</span>
+      <span class="text-xl font-semibold text-goldLight">-- USDT</span>
     </div>
     <div class="flex justify-between items-center">
-      <span class="opacity-80">Perkiraan/Tahun</span>
-      <span class="text-lg font-medium text-emas">-- USDT</span>
+      <span class="opacity-80">Estimated Annual Payout</span>
+      <span class="text-lg font-medium text-gold">-- USDT</span>
     </div>
   </div>
 
-  <!-- TOMBOL UTAMA -->
+  <!-- MAIN ACTIONS -->
   <div class="grid grid-cols-2 gap-3 mb-4">
-    <button class="btn-emas rounded-xl py-3.5" onclick="kirim('beli')">🛒 Beli Unit</button>
-    <button class="btn-gelap rounded-xl py-3.5 text-emasTerang" onclick="kirim('jual')">💰 Jual Unit</button>
-    <button class="btn-gelap rounded-xl py-3.5 text-emasTerang" onclick="kirim('klaim')">📥 Ambil Dividen</button>
-    <button class="btn-gelap rounded-xl py-3.5 text-emasTerang" onclick="kirim('saya')">📊 Data Akun</button>
+    <button class="btn-gold rounded-xl py-3.5" onclick="send('buy')">🛒 Buy Shares</button>
+    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('sell')">💰 Sell Shares</button>
+    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('claim')">📥 Claim Dividends</button>
+    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('me')">📊 My Account</button>
   </div>
 
-  <!-- SWAP & PASAR -->
-  <div class="card bg-kartu rounded-2xl p-4 mb-4">
-    <h3 class="font-bold mb-3 text-emasTerang">🔄 Tukar & Pasar</h3>
-    <button class="btn-gelap rounded-xl py-3 w-full text-emasTerang mb-2" onclick="buka('https://ston.fi/swap')">
-      TON ↔ USDT ↔ Token
+  <!-- SWAP & MARKET -->
+  <div class="card bg-card rounded-2xl p-4 mb-4">
+    <h3 class="font-bold mb-3 text-goldLight">🔄 Swap & Market</h3>
+    <button class="btn-dark rounded-xl py-3 w-full text-goldLight mb-2" onclick="openLink('https://ston.fi/swap')">
+      TON ↔ USDT ↔ Tokens
     </button>
-    <button class="btn-gelap rounded-xl py-3 w-full text-emasTerang" onclick="kirim('grafik')">
-      📈 Tren Penjualan
+    <button class="btn-dark rounded-xl py-3 w-full text-goldLight" onclick="send('chart')">
+      📈 Sales Trend
     </button>
   </div>
 
-  <!-- GRAFIK PASAR -->
-  <div class="card bg-kartu rounded-2xl p-4">
-    <h3 class="font-bold mb-3 text-emasTerang">📊 GRAFIK PENJUALAN</h3>
-    <canvas id="grafik" height="150"></canvas>
+  <!-- SALES CHART -->
+  <div class="card bg-card rounded-2xl p-4">
+    <h3 class="font-bold mb-3 text-goldLight">📊 SALES CHART</h3>
+    <canvas id="salesChart" height="150"></canvas>
   </div>
 
   <script>
-    // BUKA HALAMAN LUAR
-    function buka(link){tg.openLink(link)}
-    // KIRIM PERINTAH KE BOT - TANPA MENUTUP APLIKASI
-    function kirim(perintah){
-      tg.sendData('/' + perintah);
-      tg.showAlert("Perintah dikirim! Cek pesan bot di bawah ya.");
+    // Open external links
+    function openLink(url){ tg.openLink(url) }
+    // Send command to bot — app stays open
+    function send(command){
+      tg.sendData('/' + command);
+      tg.showAlert("Command sent! Please check your bot chat below.");
     }
-    // GRAFIK OTOMATIS
-    new Chart(document.getElementById('grafik'),{
+    // Sales chart
+    new Chart(document.getElementById('salesChart'),{
       type:'line',
       data:{
-        labels:['Sen','Sel','Rab','Kam','Jum','Sab','Min'],
+        labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
         datasets:[{
-          label:'Unit Terjual',
+          label:'Units Sold',
           data:[8,15,10,22,18,30,25],
           borderColor:'#D4AF37',
           backgroundColor:'rgba(212,175,55,0.12)',
