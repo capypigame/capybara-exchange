@@ -25,19 +25,18 @@
         .btn:active { transform: translateY(0); }
         .section-title { font-size: 18px; margin-bottom: 12px; opacity: 0.9; }
         .full-btn { width: 100%; margin-bottom: 14px; background: #1e1e1e; color: #e0c98c; border: 1px solid #e0c98c; }
-        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(20, 20, 20, 0.95); color: white; padding: 24px; border-radius: 12px; text-align: center; z-index: 999; display: none; border: 1px solid #e0c98c; max-width: 85%; }
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(20,20,20,0.95); color: white; padding: 24px; border-radius: 12px; text-align: center; z-index: 999; display: none; border: 1px solid #e0c98c; max-width: 85%; }
         .toast button { margin-top: 16px; padding: 8px 20px; background: #e0c98c; color: #121212; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 <div class="header">
-    <!-- ✅ LOGO BARU DARI LINK KAMU -->
     <img src="https://i.imgur.com/Th5oMqA.jpeg" alt="Capybara Exchange" class="logo">
     <h1>Capybara Exchange</h1>
     <p class="subtitle">Digital Shares • Profit-Sharing Dividends • USDT on TON</p>
 </div>
 <div class="stats-card">
-    <div class="stat-row"><span class="stat-label">Your Shares</span><span class="stat-value">-- Units</span></div>
+    <div class="stat-row"><span class="stat-label">Your Shares</span><span class="stat-value" id="saldo">0 Units</span></div>
     <div class="stat-row"><span class="stat-label">Dividends Earned</span><span class="stat-value">-- USDT</span></div>
 </div>
 <div class="toast" id="toast">
@@ -60,19 +59,20 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
-// ✅ KIRIM PERINTAH KE BOT DENGAN FORMAT YANG SUDAH COCOK
+// Terima data saldo dari bot saat aplikasi terbuka
+tg.onEvent('messageReceived', (e) => {
+    if (e.text && e.text.startsWith('__SALDO:')) {
+        const jumlah = e.text.replace('__SALDO:','').replace('__','');
+        document.getElementById('saldo').innerText = jumlah + ' Units';
+    }
+});
+
 function sendAction(action) {
     tg.sendData(action);
     showToast();
 }
-
-function showToast() {
-    document.getElementById('toast').style.display = 'block';
-}
-
-function closeToast() {
-    document.getElementById('toast').style.display = 'none';
-}
+function showToast() { document.getElementById('toast').style.display = 'block'; }
+function closeToast() { document.getElementById('toast').style.display = 'none'; }
 </script>
 </body>
 </html>
