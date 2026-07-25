@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: #121212; color: #e0c98c; padding: 20px 16px; min-height: 100vh; }
         .header { text-align: center; margin-bottom: 30px; }
-        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 12px; border: 2px solid #e0c98c; }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 12px; border: 2px solid #e0c98c; object-fit: cover; }
         h1 { font-size: 32px; margin-bottom: 8px; color: #e0c98c; }
         .subtitle { font-size: 16px; opacity: 0.8; line-height: 1.5; }
         .stats-card { background: #1e1e1e; border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #333; }
@@ -31,6 +31,7 @@
 </head>
 <body>
 <div class="header">
+    <!-- ✅ LOGO BARU DARI LINK KAMU -->
     <img src="https://i.imgur.com/Th5oMqA.jpeg" alt="Capybara Exchange" class="logo">
     <h1>Capybara Exchange</h1>
     <p class="subtitle">Digital Shares • Profit-Sharing Dividends • USDT on TON</p>
@@ -53,13 +54,25 @@
 <button class="btn full-btn" onclick="alert('Coming soon: TON ↔ USDT ↔ Tokens')">TON ↔ USDT ↔ Tokens</button>
 <button class="btn full-btn" onclick="alert('Coming soon: Sales Trend')">📈 Sales Trend</button>
 <button class="btn full-btn" onclick="alert('Coming soon: Sales Chart')">📊 SALES CHART</button>
+
 <script>
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
-function sendAction(action) { tg.sendData(action); showToast(); }
-function showToast() { document.getElementById('toast').style.display = 'block'; }
-function closeToast() { document.getElementById('toast').style.display = 'none'; }
+
+// ✅ KIRIM PERINTAH KE BOT DENGAN FORMAT YANG SUDAH COCOK
+function sendAction(action) {
+    tg.sendData(action);
+    showToast();
+}
+
+function showToast() {
+    document.getElementById('toast').style.display = 'block';
+}
+
+function closeToast() {
+    document.getElementById('toast').style.display = 'none';
+}
 </script>
 </body>
 </html>
