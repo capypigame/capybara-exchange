@@ -69,10 +69,10 @@
 
   <!-- MAIN ACTIONS -->
   <div class="grid grid-cols-2 gap-3 mb-4">
-    <button class="btn-gold rounded-xl py-3.5" onclick="send('buy')">🛒 Buy Shares</button>
-    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('sell')">💰 Sell Shares</button>
-    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('claim')">📥 Claim Dividends</button>
-    <button class="btn-dark rounded-xl py-3.5 text-goldLight" onclick="send('me')">📊 My Account</button>
+    <button onclick="Telegram.WebApp.sendData('buy')">🛒 Buy Shares</button>
+<button onclick="Telegram.WebApp.sendData('sell')">💰 Sell Shares</button>
+<button onclick="Telegram.WebApp.sendData('claim')">📥 Claim Dividends</button>
+<button onclick="Telegram.WebApp.sendData('account')">📊 My Account</button>
   </div>
 
   <!-- SWAP & MARKET -->
